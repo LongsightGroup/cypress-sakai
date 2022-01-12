@@ -48,6 +48,13 @@ describe('Assignments', function () {
 
           // Attempt to save it with instructions
           cy.get('div.act input.active').first().click();
+
+          // Should be an alert at top about max points
+          cy.get('#generalAlert').should('contain', 'Alert');
+
+          cy.get('#new_assignment_grade_points').type('44');
+
+          cy.get('div.act input.active').first().click();
         });
 
         it("Can associate a rubric with an assignment", () =>{
@@ -59,8 +66,10 @@ describe('Assignments', function () {
           cy.get('.itemAction').contains('Edit').click()
 
           cy.get("#gradeAssignment").click();
-          cy.get("#new_assignment_grade_points").type("55");
-          cy.get("input[name='rbcs-associate'][value='1']").click();
+
+          cy.get("input[name='rbcs-associate'][value='1']").click({force: true});
+
+          // Save the assignment
           cy.get('div.act input.active').first().click()
           cy.get("sakai-rubric-student-button").its("length") === 1;
         });

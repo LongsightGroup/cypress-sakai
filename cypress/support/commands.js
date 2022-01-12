@@ -77,7 +77,7 @@ Cypress.Commands.add('sakaiCreateCourse', (username, toolNames) => {
   cy.get('#flashNotif').contains('has been created')
   cy.get('#flashNotif a')
     .should('have.attr', 'href').and('include', '/portal/site/')
-    .then((href) => { return href })
+    .then(href => href);
 })
 
 Cypress.Commands.add("createRubric", (instructor, sakaiUrl) => {
